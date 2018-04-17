@@ -1,0 +1,31 @@
+/* pages/library/library.wxss */
+.header{
+    position: relative;
+    height: 500rpx;
+    line-height: 100rpx;
+    padding:80rpx 80rpx 80rpx 80rpx;
+    box-sizing: border-box;
+    background: #fff;
+    font-size: 38rpx;
+    color: #fff;  
+    margin-bottom: 60rpx;
+}
+.libinfo-avatar {
+  width: 100%;
+  height: 100%;
+  margin: 10rpx;
+  position: center;
+}
+.library-name {
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 50%;
+    margin-bottom: 60rpx;
+}
