@@ -2,12 +2,43 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/testpage/test1"
+    "pages/library/library",
+    "pages/about/about",
+    "pages/activity/activity",
+    "pages/addbook/addbook",
+    "pages/book_detail/book_detail",
+    "pages/form/form"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#000",
-    "navigationBarTitleText": "Pick A Book",
-    "navigationBarTextStyle": "#eeeeee"
+    "navigationBarBackgroundColor": "#00caaa",
+    "navigationBarTitleText": "Pick a Book",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#fff",
+    "selectedColor": "#fff",
+    "borderStyle": "white",
+    "backgroundColor": "#00caaa",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home.png",
+        "text": "Home"
+      },
+      {
+        "pagePath": "pages/library/library",
+        "iconPath": "images/library.png",
+        "selectedIconPath": "images/library.png",
+        "text": "Library"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user.png",
+        "text": "About"
+      }
+    ]
   }
 }

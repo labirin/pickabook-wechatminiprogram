@@ -4,51 +4,213 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello Labirin',
+    inputShowed: false,
+    inputVal: "",
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    duration: 1000,
+    loadingHidden: false, // loading
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    swiperCurrent: 0,
+    selectCurrent: 0,
+    activeCategoryId: 0,
+    goods: [],
+    scrollTop: "0",
+    loadingMoreHidden: true,
+    /*search input */
+    inputVal: '',
+    categories: [
+
+      {
+        id: 0,
+        name: 'Books'
+      }, {
+        id: 1,
+        name: 'Utils'
+      },
+      {
+        id: 2,
+        name: 'Clothes'
+      },
+      {
+        id: 3,
+        name: 'Phones'
+      }, {
+        id: 4,
+        name: 'Laptops'
+      }, {
+        id: 5,
+        name: 'Food'
+      },
+      {
+        id: 6,
+        name: 'Others'
+      }
+    ]
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+  },
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+  clearInput: function () {
+    this.setData({
+      inputVal: ""
+    });
+  },
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    });
+  },
+  onShareAppMessage: function () {
+    return {
+      title: 'connecting everyone',
+      path: 'pages/index/index'
+    }
+  },
+  clearInput: function (e) {
+    this.setData({
+      inputVal: ''
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+  inputTyping: function (e) {
+    var that = this
+    that.setData({
+      inputVal: e.detail.value
+    })
+  },
+  redirectToUser: function (e) {
+    wx.navigateTo({
+      url: '/pages/search/index?keyword=' + this.data.inputVal
+    })
+  },
+  tabClick: function (e) {
+    this.setData({
+      activeCategoryId: e.currentTarget.id
+    });
+    this.getGoodsList(this.data.activeCategoryId);
+  },
+  swiperchange: function (e) {
+    this.setData({
+      swiperCurrent: e.detail.current
+    })
+  },
+  toDetailsTap: function (e) {
+    wx.navigateTo({
+      url: "/pages/goods-details/index?_id=" + e.currentTarget.dataset.id
+    })
+  },
+  tapBanner: function (e) {
+    if (e.currentTarget.dataset.id != 0) {
+      wx.navigateTo({
+        url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
       })
     }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  bindTypeTap: function (e) {
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      selectCurrent: e.index
     })
-  }
-})
+  },
+  scroll: function (e) {
+    var that = this, scrollTop = that.data.scrollTop;
+    that.setData({
+      scrollTop: e.detail.scrollTop
+    })
+  },
+  onLoad: function () {
+    var that = this
+    that.setData({
+      categories: that.data.categories
+    })
+    wx.setNavigationBarTitle({
+      title: 'connect'
+    })
+    wx.request({
+      url: 'https://connect.duohuo.org/api/v1/banners',
+      success: function (res) {
+        that.setData({
+          banners: res.data.data
+        });
+      }
+    })
+  },
+
+  onShow: function () {
+    var that = this
+    wx.request({
+      url: 'https://connect.duohuo.org/api/v1/posts',
+      header: {
+        auth: wx.getStorageSync('auth')
+      },
+      success: function (res) {
+        that.setData({
+          goods: [],
+          loadingMoreHidden: true
+        });
+        var goods = [];
+        if (res.data.code != 0 || res.data.data.length == 0) {
+          that.setData({
+            loadingMoreHidden: false,
+          });
+          return;
+        }
+
+        for (var i = 0; i < res.data.data.length; i++) {
+          goods.push(res.data.data[i]);
+
+        }
+        that.setData({
+          goods: goods,
+        });
+      }
+    })
+    //get the current users post
+    var post = wx.getStorageSync('post')
+    //push to the top of  the current posts
+    this.data.goods.push(post)
+    that.setData({
+      goods: that.data.goods
+    })
+
+  },
+  getGoodsList: function (categoryIndex) {
+    var that = this;
+    wx.request({
+      url: 'https://connect.duohuo.org/api/v1/posts/category?categoryIndex=' + categoryIndex,
+      method: 'POST',
+      header: {
+        auth: wx.getStorageSync('auth')
+      },
+      success: function (res) {
+
+        that.setData({
+          goods: [],
+          loadingMoreHidden: true
+        });
+        var goods = [];
+        if (res.data.code != 0 || res.data.data.length == 0) {
+          that.setData({
+            loadingMoreHidden: false,
+          });
+          return;
+        }
+        for (var i = 0; i < res.data.data.length; i++) {
+          goods.push(res.data.data[i]);
+        }
+        that.setData({
+          goods: goods, goods: goods,
+        });
+      } //end of success
+    })//end of wx.request
+  } //end of getGoodsList
+});
+

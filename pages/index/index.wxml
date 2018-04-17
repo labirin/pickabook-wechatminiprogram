@@ -1,16 +1,170 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-<view  class="btnGroup">
-        <view class="item orange" >See detail</view>
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="Search" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">Search</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">Cancel</view>
+        </view>
+        
+        <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view>实时搜索文本</view>
+                </view>
+            </navigator>
+            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view>实时搜索文本</view>
+                </view>
+            </navigator>
+            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view>实时搜索文本</view>
+                </view>
+            </navigator>
+            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view>实时搜索文本</view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>
+
+
+<view class="newest">
+    <view class="newest-title">
+      <text>新品</text>
+    </view>
+    <!--必须要两个分别奇偶纪录才会呈现左右效果  -->
+    <view class="newest-box">
+      <view wx:for="{{odd_goods}}" wx:key="{{index}}" class="newest-list">
+        <navigator url="details/details?good_id={{item.goodId}}&good_name={{item.goodName}}&good_main_url={{item.goodMainUrl}}&good_price={{item.goodPrice}}&good_detail_urls={{item.goodDetailUrls}}">
+          <image src="{{item.goodMainUrl}}"></image>
+          <view class="newest-text">
+            <text>{{item.goodName[0]}}</text>
+            <text>{{item.goodName[1]}}</text>
+            <text>{{item.goodName[2]}}</text>
+            <text>{{item.goodName[3]}}</text>
+            <text>{{item.goodName[4]}}</text>
+            <text>{{item.goodName[5]}}</text>
+            <text>{{item.goodName[6]}}</text>
+            <text>{{item.goodName[7]}}</text>
+            <text>{{item.goodName[8]}}</text>
+            <text>{{item.goodName[9]}}</text>
+            <text>{{item.goodName[10]}}</text>
+            <text>{{item.goodName[11]}}</text>
+            <text>{{item.goodName[12]}}</text>
+            <text>{{item.goodName[13]}}</text>
+            <text>{{item.goodName[14]}}</text>
+            <text>{{item.goodName[15]}}</text> ...
+          </view>
+          <view class="newest-text-price">
+            <text>￥ {{item.goodPrice}}</text>
+          </view>
+        </navigator>
       </view>
+      <view wx:for="{{even_goods}}" wx:key="{{index}}" class="newest-list">
+        <navigator url="details/details?good_id={{item.goodId}}&good_name={{item.goodName}}&good_main_url={{item.goodMainUrl}}&good_price={{item.goodPrice}}&good_detail_urls={{item.goodDetailUrls}}">
+          <image src="{{item.goodMainUrl}}"></image>
+          <view class="newest-text">
+            <text>{{item.goodName[0]}}</text>
+            <text>{{item.goodName[1]}}</text>
+            <text>{{item.goodName[2]}}</text>
+            <text>{{item.goodName[3]}}</text>
+            <text>{{item.goodName[4]}}</text>
+            <text>{{item.goodName[5]}}</text>
+            <text>{{item.goodName[6]}}</text>
+            <text>{{item.goodName[7]}}</text>
+            <text>{{item.goodName[8]}}</text>
+            <text>{{item.goodName[9]}}</text>
+            <text>{{item.goodName[10]}}</text>
+            <text>{{item.goodName[11]}}</text>
+            <text>{{item.goodName[12]}}</text>
+            <text>{{item.goodName[13]}}</text>
+            <text>{{item.goodName[14]}}</text>
+            <text>{{item.goodName[15]}}</text> ...
+          </view>
+          <view class="newest-text-price">
+            <text>￥ {{item.goodPrice}}</text>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+
+
+<!-- <view class="type-container">
+        <scroll-view class="type-navbar" scroll-x="true" style="width: 100%">
+            <view class="type-box" wx:for-items="{{categories}}" wx:key="unique">
+                <view id="{{item.id}}" class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick">
+                    {{item.name}}
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="goods-container">
+        <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}"
+         bindtap="toDetailsTap" data-id="{{item._id}}">
+           <view class="img-box">
+              <image src="{{item.pics[0]}}" class="image"/>
+           </view>
+           <view class="goods-title">{{item.title}}</view>
+           <view class="goods-price">¥ {{item.price}}</view>
+           
+        </view>
+    </view>
+     <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">no more goods</view> -->
+
+<view class="container">
+   <view class="swiper-container">
+        <swiper class="swiper_box" 
+                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+            <block wx:for="{{banners}}" wx:key="unique">
+                <swiper-item>
+                    <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}" class="slide-image" width="750rpx" height="562.5rpx"/>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="dots">  
+            <block wx:for="{{banners}}" wx:key="unique">  
+                <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+            </block>  
+        </view>  
+   </view>
+   
+    <view class="type-container">
+        <scroll-view class="type-navbar" scroll-x="true" style="width: 100%">
+            <view class="type-box" wx:for-items="{{categories}}" wx:key="unique">
+                <view id="{{item.id}}" class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick">
+                    {{item.name}}
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="goods-container">
+        <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}"
+         bindtap="toDetailsTap" data-id="{{item._id}}">
+           <view class="img-box">
+              <image src="{{item.pics[0]}}" class="image"/>
+           </view>
+           <view class="goods-title">{{item.title}}</view>
+           <view class="goods-price">¥ {{item.price}}</view>
+           
+        </view>
+    </view>
+    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">no more goods</view>
 </view>
