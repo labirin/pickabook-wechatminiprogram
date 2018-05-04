@@ -18,7 +18,7 @@
 - [ ] Me
     - [ ] Uplad QR-Code
     - [x] Customize Library
-         - [ ] Edit Post
+         - [x] Edit Post
          - [x] Delete Post
     - [ ] Change Library's Name
     - [ ] Change Library's Banner
