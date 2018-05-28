@@ -16,25 +16,21 @@
     - [x] Share Library to WeChat
     
 - [ ] Me
-    - [ ] Uplad QR-Code
+    - [x] Uplad QR-Code
     - [x] Customize Library
          - [x] Edit Post
          - [x] Delete Post
     - [ ] Change Library's Name
     - [ ] Change Library's Banner
     
-- [ ] Book Detail Page
+- [x] Book Detail Page
     - [x] Share Book to WeChat
-    - [ ] Add Wechat
+    - [x] Add Wechat
 
 
 # To do
-- [x] Uplad QR-Code
-- [x] Add Wechat
-- [x] Edit Post
-
-## Next
 - [ ] Change Library's Name
 - [ ] Change Library's Banner
+- [ ] fix some bugs on category, pic in edit form, and booklist for user in library page
 
 
