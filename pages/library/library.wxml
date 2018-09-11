@@ -1,54 +1,58 @@
 <!--pages/library/library.wxml-->
 <view class="header">
-<image class="libinfo-avatar" src="/images/bookshelf.jpg"></image>
-<text class="library-name">Muhali's Library</text>
-</view>
-<view class="button-sp-area">
-            <button bindtap="bindViewTapAdd" class="weui-btn" type="primary" plain="true">Add Book</button>
-</view>
+
+  <image class="libinfo-avatar" wx:if="{{mylibPict}}" src="{{mylibPict}}" mode="AspectFill"/>
+  <image class="libinfo-avatar" wx:else src="/images/bookshelf.jpg"></image>
+
+<view class="library-name">
+  <view wx:if="{{mylibName}}">{{mylibName}}</view>
+  <view wx:else>Your Library Name</view>
+<!-- <text class="library-name">Muhali's Library</text> -->
+</view></view>
+
+<button class="add-btn" bindtap="addBook">Add Book</button>
 
 <view class="page">
-    <view class="page__bd">
+     <view class="page__bd" >
         <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__hd">My Book</view>
-            <view class="weui-panel__bd">
-                <navigator url="../book_detail/book_detail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="/images/book1.jpeg" />
+            <view class="weui-panel__hd">Book Collection</view>
+            <view class="weui-panel__bd" > 
+                <view class="weui-media-box weui-media-box_appmsg"  wx:for-items="{{goods}}" wx:key="{{library}}" data-id="{{item._id}}" >
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg ">
+                        <image class="weui-media-box__thumb" src="{{item.pics[0]}}" mode="aspectFill"/>
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">Book 1</view>
-                        <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+                        <view class="weui-media-box__title">{{item.title}}</view>
+                        
+                        <view class="weui-media-box__desc">by {{item.writer}}</view>
+                        <!-- <view class="weui-media-box__info short-desc">{{item.description}}</view> -->
                     </view>
-                </navigator>
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="/images/book2.jpg" />
+                    <view class="custom" >
+                      <button class="btn" size="mini" style="display:block" type="default" bindtap="UpdateClick" data-id="{{item._id}}">edit</button>
+                      <button class="btn" size="mini" style="display:block" type="warn" bindtap="delClick" data-id="{{item._id}}">delete</button>
                     </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">Book 2</view>
-                        <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="/images/book1.jpeg" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">Book 3</view>
-                        <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
-                    </view>
-                </navigator>
-            </view>
-            <view class="weui-panel__ft">
-                <view class="weui-cell weui-cell_access weui-cell_link">
-                    <view class="weui-cell__bd">查看更多</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    
                 </view>
+                
+                
             </view>
+            
           </view>
-          
-          </view>
+          </view> 
+
+
+<!-- <view class="goods-container">
+        <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}"
+         bindtap="toDetailsTap" data-id="{{item._id}}">
+           <view class="img-box">
+              <image src="{{item.pics[0]}}" class="image"/>
+           </view>
+           <view class="goods-title">{{item.title}}</view>
+           
+        </view>
+    </view> -->
+    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">no books</view>
+
 </view>
 
 

@@ -1,0 +1,26 @@
+<!--pages/custom-label/index.wxml-->
+<view class="action">
+  <view class="label">Upload an image to change your banner and give a name of your library</view>
+  <view class="weui-cell">
+  <view class="label-right">
+<view class="weui-label">Library Name</view>
+  </view>
+  <view class="label">
+    <input name="idInput" bindinput="bindInput" class="input" placeholder="input a name" value="{{libName}}" />
+  </view>
+  </view>
+
+              
+  <view class="action-photo">
+    <block wx:for="{{picUrls}}" wx:key="{{item}}" wx:index="{{index}}">
+      <image src="{{item}}">
+        <icon type="cancel" data-index="{{index}}" color="red" size="18" class="del" bindtap="delPic" />
+      </image>
+    </block>
+    <text class="add" bindtap="bindCamera">{{actionText}}</text>
+  </view>
+</view>
+
+<view class="weui-btn-area">
+    <button class="submit-btn" type="warn" loading="{{loading}}" bindtap="formSubmit" style="font-size:15px; padding:5px">SAVE</button>
+</view>

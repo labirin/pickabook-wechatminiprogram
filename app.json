@@ -1,43 +1,50 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
+    "pages/my/index",
+    "pages/suggestions/index",
+    "pages/upload/index",
+    "pages/goods-details/index",
+    "pages/about/index",
+    "pages/search/index",
+    "pages/category/index",
+    "pages/qrcode/index",
+    "pages/qrcode-image/index",
     "pages/library/library",
-    "pages/about/about",
-    "pages/activity/activity",
-    "pages/addbook/addbook",
-    "pages/book_detail/book_detail",
-    "pages/form/form"
+    "pages/update/index",
+    "pages/bookshelf/bookshelf",
+    "pages/custom-label/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#00caaa",
-    "navigationBarTitleText": "Pick a Book",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#D03232",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#eeeeee",
+    "navigationBarTitleText": "Pick a Book"
   },
   "tabBar": {
-    "color": "#fff",
-    "selectedColor": "#fff",
-    "borderStyle": "white",
-    "backgroundColor": "#00caaa",
+    "backgroundColor": "#FFFFFE",
+    "borderStyle": "#D3D3D3",
+    "selectedColor": "#D03232",
+    "color": "#131313",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home.png",
+        "iconPath": "images/home-black.png",
+        "selectedIconPath": "images/home-red.png",
         "text": "Home"
       },
       {
         "pagePath": "pages/library/library",
-        "iconPath": "images/library.png",
-        "selectedIconPath": "images/library.png",
+        "iconPath": "images/library-black.png",
+        "selectedIconPath": "images/library-red.png",
         "text": "Library"
       },
       {
-        "pagePath": "pages/about/about",
-        "iconPath": "images/user.png",
-        "selectedIconPath": "images/user.png",
-        "text": "About"
+        "pagePath": "pages/my/index",
+        "iconPath": "images/user-black.png",
+        "selectedIconPath": "images/user-red.png",
+        "text": "Profile"
       }
     ]
   }

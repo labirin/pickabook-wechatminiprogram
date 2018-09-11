@@ -1,0 +1,56 @@
+<!--pages/goods-details/index.wxml-->
+
+<view class="container">
+  <view class="swiper-container">
+    <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+      <block wx:for="{{goodsDetails.pics}}" wx:key="unique" class="previewimg">
+        <swiper-item>
+          <image src="{{item}}" data-src="{{item}}" class="slide-image" width="355" height="150" mode="aspectFill" bindtap="previewImage"/>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <!-- the dots -->
+    <view class="dots">
+      <block wx:for="{{goodsDetails.pics}}" wx:key="item">
+        <view class="dot{{index==swiperCurrent ? 'active': ''}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <!-- goods info -->
+  <view class="goods-info items_shadow">
+    <view class="goods-title">{{goodsDetails.title}}</view>
+    <view class="goods-price">by {{goodsDetails.writer}}</view>
+     <view class="goods-status" wx:if="{{goodsDetails.switchChecked == true}}">Available to Pick</view>
+    <view class="goods-status" style='color:red' wx:elif="{{goodsDetails.switchChecked != true}}">Unvailable to Pick</view>
+  </view>
+
+  <!-- display goods description -->
+  <view class="goods-desc-info">
+    <view class="label-title">Book Detail</view>
+    <view class="goods-text">ISBN : {{goodsDetails.isbn}}</view>
+    <view class="goods-text ">Description : {{goodsDetails.description}}</view>
+    <button class="add-btn" bindtap="share" open-type="share">Share this Book!</button>
+  </view>
+
+  <!-- footer for wechat and phone call -->
+  <view class="footer-box">
+    <!-- <view class="join-shop-cart" bindtap="share">Share</view> -->
+    <!-- <view class="like">
+      <button class="goods-like" bindtap="favoritePost">
+        <image wx:if="{{!liked}}" class="like-icon" src="/images/heart.png"></image>
+        <image wx:if="{{liked}}" class="like-icon" src="/images/heart-active.png"></image>
+      </button>
+      <view class="goods-favcount">{{count}} </view>
+    </view> -->
+    <view class="join-shop-cart" bindtap="makecall">
+      <image src="/images/call.png" class="share-icon"></image>
+      Call to Pick
+    </view>
+    <view class="now-buy" bindtap="addWechat">
+    <image src="/images/wechat.png" class="wechat-icon"></image>
+      Add Wechat
+    </view>
+  </view>
+</view>

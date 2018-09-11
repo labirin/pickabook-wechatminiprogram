@@ -1,0 +1,36 @@
+
+<view class="container">
+<view class="header">
+<view class="black-cover"></view>
+<image class="logo" style="width:350px;height:150px" src="../../images/mylogo.png"></image>
+</view>
+<view class="version">
+<view class="version-title">PickaBook </view>
+<view class="versin-text">{{version}} Version</view>
+</view>
+
+<view class="about">
+	<view class="about-item">
+		<text class="about-item-title">Pick a Book Application</text>
+		<text class="desc-content">Do you have many books in your bookshelf? Let's share the book! 
+    Pick a Book is book sharing application for foreign student in China. The aim is to help you to know other people's bookshelf. If you think hard to find non-chinese book in China, just search here, share with others, ask to borrow. Then, <text style="font-weight:bold">pick a book</text>!
+		</text>
+	</view>
+<view class="about-item">
+    <text class="about-item-title">Developer</text>
+		<text class="desc-content">I'm a bachelor degree student in Nanjing. If you like the app, have any suggestion, or wanna talk, you can add my wechat : palsuu
+		</text>
+	</view>
+
+	<view class="about-item">
+		<text class="about-item-title">Note :</text>
+		<text class="desc-content">This application developed to fulfil the requirements for attaining Bachelor Degree in Software Engineering. So, this simple application still has many shortcomings.  Therefore, it still requires further development to improve the features. Thanks for understanding!
+		</text>
+		<!-- <text class="about-item-content link">https://github.com/francishero</text>
+		<text class="about-item-content link">wechat: baheroh</text> -->
+	</view>
+</view>
+<view class="footer">
+    <text  class="nxu-text">School of Information Engineering | Nanjing Xiaozhuang University</text>
+  </view>
+</view>

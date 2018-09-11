@@ -2,13 +2,12 @@
 .header{
     position: relative;
     height: 500rpx;
-    line-height: 100rpx;
-    padding:80rpx 80rpx 80rpx 80rpx;
+
+    padding:50rpx 60rpx 60rpx 40rpx;
     box-sizing: border-box;
-    background: #fff;
-    font-size: 38rpx;
+    font-size: 45rpx;
     color: #fff;  
-    margin-bottom: 60rpx;
+    margin-bottom: 80rpx;
 }
 .libinfo-avatar {
   width: 100%;
@@ -17,7 +16,7 @@
   position: center;
 }
 .library-name {
-  color: #aaa;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,4 +27,35 @@
     padding-top: 15px;
     width: 50%;
     margin-bottom: 60rpx;
+}
+short-desc {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.custom{
+  display:block;
+
+  
+}
+.btn{
+  margin-right: 10px;
+  margin-bottom: 5px;
+
+
+}
+.add-btn{
+  width:25%;
+  background-color:#D03232;
+  color:#fff;
+  margin-bottom:20px;
+  font-size: 14px;
+}
+.no-more-goods{
+  text-align: center;
+  font-size: 24rpx;
+  padding-bottom:48rpx; 
+  color: #999;
+  margin-top: 25rpx;
 }

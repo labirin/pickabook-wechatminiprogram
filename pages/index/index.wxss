@@ -1,3 +1,4 @@
+/**index.wxss**/
 
 .container {
   background-color: #F2f2f2;
@@ -57,13 +58,13 @@ swiper-item image {
   color: transparent;
 }
 .type-box{
-  width:160rpx;
   box-sizing: content-box;
   font-size: 24rpx;
-  line-height: 84rpx;
+  line-height: 70rpx;
   text-align: center;
   display: inline-block;
   overflow: hidden;
+  padding: 15rpx;
 }
 .type-navbar-item{
   border-bottom: 4rpx solid #fff;
@@ -74,37 +75,38 @@ swiper-item image {
 
 .goods-container{
   display: flex;
-  justify-content: space-between;  
   flex-wrap:wrap;
   box-sizing: content-box;
-  padding: 24rpx;
+  padding: 14rpx;
 }
 .goods-box{
-  width: 339rpx;
-  height: 472rpx;
-  background-color: #fff;
-  overflow: hidden;
-  margin-bottom: 24rpx;
-  position: relative;
+  width:225rpx;
+  height:370rpx;
+  background-color:#fff;
+  overflow:hidden;
+  margin-bottom:24rpx;
+  position:relative;
+  margin:9rpx;
+
 }
 .goods-box .img-box{
-  width: 339rpx;
-  height: 339rpx;
-  overflow: hidden;
+  width:255rpx;
+  height:330rpx;
+  overflow:hidden;
+
 }
 .goods-box .img-box image{
-   width: 339rpx;
-   height: 339rpx;
+   width:225rpx;
+  height:325rpx;
+
 }
 .goods-box .goods-title{
-  width: 280rpx;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  font-size: 24rpx;
-  padding: 24rpx 0 0rpx 0;
+  font-size: 26rpx;
   color:#000;
-  margin-left: 24rpx;
+  text-align: center;
 }
 .goods-box .goods-price{
   width: 280rpx;
@@ -138,3 +140,4 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e64340', end
   top: 0;
   left: 0;
 }
+

@@ -1,39 +1,121 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+this.getUserInfo()
+  },
+  getUserInfo:function(cb){
+    var that = this
+      //调用登录接口
+      wx.login({
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+       success: res => {
+          console.log('the code is ', res.code)
+          this.globalData.code = res.code
+          wx.request({
+            url:'https://api.pickabook.xyz/api/v1/users/auth',
+           // url:'http://202.182.124.93/api/v1/users/auth',
+            // url: 'http://localhost:3002/api/v1/users/auth',
+            
+            method:'POST',
+            data:{
+              code: this.globalData.code
+            },
+            success:function(res){
+            //  that.globalData.token=res.data.token
+              wx.setStorage({
+                key: 'token',
+                data: res.data.token,
+                success: function(res){
+                  console.log('successfully stored token')
+                  wx.getUserInfo({
+      success: function (res) {
+        that.globalData.userInfo = res.userInfo
+        typeof cb == "function" && cb(that.globalData.userInfo)
       }
     })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
+      var token=wx.getStorageSync('token')
+      console.log('login token new---',token)
+    
+    wx.request({
+      url: 'https://api.pickabook.xyz/api/v1/users/login',
+     // url:'http://202.182.124.93/api/v1/users/login',
+     // url: 'http://localhost:3002/api/v1/users/login',
+      
+      method:'POST',
+      header:{
+        'content-Type':'application/json'
+      },
+      data:{
+        wechat:{
+          openid:token
+        }
+      },
+      success:function(res)
+      {
+        console.log(res.data)
+        var mytoken = res.data.token
+        if(res.data.code===0)
+        {
+          wx.setStorage({
+            key: 'auth',
+            data: res.data.token,
+            success: function(res){
+              // success
+              console.log('auth stored')
+            },
+            fail: function() {
+              // fail
+              console.log('could not retrive auth')
+            },
+            complete: function() {
+              // complete
             }
           })
         }
       }
     })
+
+                },
+                fail: function() {
+                  console.log('could not store the token')
+                },
+                complete: function() {
+                  // complete
+                }
+              })
+              console.log('token in storage---',wx.getStorageSync('token'))
+              
+             // that.login_in()
+              return
+              
+            }
+          })
+        
+        }
+      })
+    
   },
-  globalData: {
-    userInfo: null
+  login_in:function(){
+    var that=this 
+    console.log('login called')
+    var token=wx.getStorageSync('token')
+    console.log('token in login---',token)
+    console.log('token sending for login ',token)
+    
+  },
+  
+  globalData:{
+    userInfo: null,
+    version: '1.0', //app version 
+    mytoken:{}
+  },
+  //my utils 
+  showLoadToast:function(title,duration){
+    wx.showToast({
+      title: title || 'Loading...',
+      icon:'loading',
+      mask:true,
+      duration:duration || 10000
+    })
   }
 })

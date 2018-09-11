@@ -1,0 +1,62 @@
+<!--pages/bookshelf/bookshelf.wxml-->
+
+<view class="header">
+<image class="libinfo-avatar" wx:if="{{mylibPict}}" src="{{mylibPict}}" mode="AspectFill"/>
+  <image class="libinfo-avatar" wx:else src="/images/bookshelf.jpg"></image>
+<view class="library-name">
+  <view wx:if="{{mylibName}}">{{mylibName}}</view>
+  <view wx:else>Your Library Name</view>
+<!-- <text class="library-name">Muhali's Library</text> -->
+</view>
+</view>
+
+
+<view class="page">
+     <view class="page__bd" >
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">Book Collection</view>
+            <view class="weui-panel__bd" >  
+                <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active "  wx:for-items="{{goods}}" wx:key="{{library}}" data-id="{{item._id}}" bindtap="toDetailsTap" >
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg ">
+                        <image class="weui-media-box__thumb" src="{{item.pics[0]}}" mode="aspectFill"/>
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{item.title}}</view>             
+                        <view class="weui-media-box__desc">by {{item.writer}}</view>
+                    </view>
+                    
+                </view>
+                
+                
+            </view>
+          
+          </view>
+          </view> 
+
+
+<!-- <view class="goods-container">
+        <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}"
+         bindtap="toDetailsTap" data-id="{{item._id}}">
+           <view class="img-box">
+              <image src="{{item.pics[0]}}" class="image"/>
+           </view>
+           <view class="goods-title">{{item.title}}</view>
+           
+        </view>
+    </view>-->
+    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">You don't have any books! <br/> Let's add one and customize your label!</view> 
+
+
+    <view class="footer-box"> 
+        <button class="share-lib" id="btn" open-type="share" style="border-radius:0px">
+        <image src="/images/share-white.png" class="share-icon"></image>
+        <text class='share-text'>Share Library</text>
+        </button>
+     
+    </view>
+
+
+</view>
+<view class="container">
+</view>
+

@@ -1,0 +1,87 @@
+<form bindsubmit="submitF" bindreset="formReset" class="form">
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__bd"> 
+        <view class="weui-cells__title">Input the detail information of your book.</view>
+        <view class="weui-cells weui-cells_after-title">
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">Title</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="title of your book" name="inputTitle" value="{{title}}" bindchange="titleInput" required/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">Writer</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="inputWriter" value="{{writer}}" bindchange="writerInput" required placeholder="writer/author of your book"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">ISBN</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="ISBN number" name="inputISBN" value="{{isbn}}" bindchange="isbnInput" maxlength="13" required/>
+                </view>
+            </view> 
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">Description</view>
+                </view>
+                <view class="weui-cell__bd">
+                     <input name="inputDescription" value="{{description}}" bindchange="descriptionInput" class="weui-input" cursor-spacing="40" disabled='true'/> 
+                </view>
+            </view> 
+
+            <view class="weui-cell">
+            <textarea rows="4" cols="50" placeholder="simple description" name="inputDescription" value="{{description}}" bindchange="descriptionInput" cursor-spacing="40" maxlength="1000"/>
+</view> 
+
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">Category</view>
+      </view>
+
+        <picker bindchange="bindPickerChange" value="{{categoryIndex}}" range="{{arrayCategories}}"  mode="selector" class="width100">
+              <view class="weui-select weui-select_in-select-after"><text>{{arrayCategories[categoryIndex]}}</text></view>
+        </picker>
+            </view>
+        
+<view class="weui-cell weui-uploader">
+<view class="action">
+<text class="upload_text">Upload Book Cover</text>
+<view class="action-photo">
+  
+        <block wx:for="{{files}}" wx:key="{{item}}" wx:index="{{index}}">
+            <image src="{{item}}"><icon type="cancel" data-index="{{index}}" 
+            color="red" size="18" class ="del" bindtap="delPic" /></image>
+        </block>
+            <text class="add" bindtap="bindCamera">{{actionText}}</text>
+        </view>
+
+</view>
+</view>
+</view>
+  </view>
+</view>
+
+        <view class="weui-cells">
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">Available to Pick</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange="bindswitch" value="{{switchChecked}}"  mode="selector" class="width100" checked />
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-btn-area ">
+            <button formType="submit" type="warn" bindtap="showTopTips" style="font-size:15px; padding:5px">Submit</button>
+        </view>
+</form>
